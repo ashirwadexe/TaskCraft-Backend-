@@ -83,7 +83,7 @@ export const login = async (req, res) => {
         }
 
         return res.status(200).cookie("token", token, {maxAge: 1*24*60*60*1000, httpsOnly: true, sameSite: 'strict'}).json({
-            message: "User Logged In !!!",
+            message: `Welcome ${user.name} !!!`,
             success: true,
             user
         });
@@ -92,6 +92,22 @@ export const login = async (req, res) => {
         return res.status(500).json({
             message: "Internal Server Error",
             success: false,
+        });
+    }
+};
+
+//USER LOGOUT logic
+export const logout = async (req, res) => {
+    try {
+        return res.status(200).cookie("token", "", {maxAge: 0}).json({
+            message: "User Logged Out",
+            success: true
+        });
+    } catch (error) {
+        console.log("Logout error: ", error);
+        return res.status(500).json({
+            message: "Internal Server Error",
+            success: false
         });
     }
 };
