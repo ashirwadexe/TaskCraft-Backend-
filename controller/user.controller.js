@@ -1,5 +1,5 @@
-import { JsonWebTokenError } from "jsonwebtoken";
-import { User } from "../models/user.model";
+import jwt from "jsonwebtoken";
+import { User } from "../models/user.model.js";
 import bcrypt from "bcrypt";
 
 //REGISTRATION Logic
