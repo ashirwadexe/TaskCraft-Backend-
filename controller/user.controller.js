@@ -2,7 +2,7 @@ import { User } from "../models/user.model";
 import bcrypt from "bcrypt";
 
 //REGISTRATION Logic
-const register = async (req, res) => {
+export const register = async (req, res) => {
     try {
         const { name, email, password} = req.body;
         if(!name || !email || !password) {
@@ -33,6 +33,11 @@ const register = async (req, res) => {
             success: true
         });
     } catch (error) {
-        console.log(error);
-    }
-}
+        console.error("Error during registration:", error);
+    
+        return res.status(500).json({
+          message: "Server error. Please try again later.",
+          success: false,
+        });
+      }
+};
